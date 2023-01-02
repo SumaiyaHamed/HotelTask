@@ -7,6 +7,10 @@ public class MainClass {
 
 		Hotels hotel=new Hotels();
 		hotel.createTable();
+		hotel.readFromTable();
+		
+		Employee_Type employeetype = new Employee_Type();
+		employeetype.createEmployeeTypeTable();
 
 	}
 

@@ -3,6 +3,7 @@ package HotelPacket;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -49,6 +50,8 @@ public class Hotels {
 		// take input from user to see how many users you have to print on console
 
 		// use SELECT query and ResultSets for showing
+			
+			
 
 		}
 
