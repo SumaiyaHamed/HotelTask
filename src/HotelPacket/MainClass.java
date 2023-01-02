@@ -10,7 +10,13 @@ public class MainClass {
 		hotel.readFromTable();
 		
 		Employee_Type employeetype = new Employee_Type();
-		employeetype.createEmployeeTypeTable();
+	employeetype.createEmployeeTypeTable();
+		
+		Guests Guest = new Guests();
+		Guest.createGuestsTable();
+		
+		//Employees employee = new Employees();
+		//employee.createEmployeeTable();
 
 	}
 
