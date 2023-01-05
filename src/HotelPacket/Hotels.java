@@ -3,6 +3,7 @@ package HotelPacket;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -100,7 +101,7 @@ public class Hotels {
 		String url = "jdbc:mysql://localhost:3306/HotelDBMS";
 		String username = "root";
 		String password = "root";
-	 Connection conn = null;
+		Connection conn = null;
 		Statement stmt = null;
 		try {
 			try {
@@ -113,15 +114,16 @@ public class Hotels {
 			stmt = (Statement) conn.createStatement();
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Please Enter any id to Update hotel data :");
-	         int userinput =scanner.nextInt();
-	         System.out.println("Please Enter the new Hotel name:");
-	         String hotelname=scanner.next();
-	         System.out.println("Please Enter the new Hotel location:");
-	         String hotellocatin=scanner.next();
-	
-	         Statement st = conn.createStatement();
-	         String sql="UPDATE Hotels SET hotel_name='"+hotelname+"',hotel_location='"+hotellocatin+"' WHERE id='"+userinput+"'";
-		     int result=st.executeUpdate(sql);
+			int userinput = scanner.nextInt();
+			System.out.println("Please Enter the new Hotel name:");
+			String hotelname = scanner.next();
+			System.out.println("Please Enter the new Hotel location:");
+			String hotellocatin = scanner.next();
+
+			Statement st = conn.createStatement();
+			String sql = "UPDATE Hotels SET hotel_name='" + hotelname + "',hotel_location='" + hotellocatin
+					+ "' WHERE id='" + userinput + "'";
+			int result = st.executeUpdate(sql);
 			System.out.println("updated  successfully...");
 		} catch (SQLException excep) {
 			excep.printStackTrace();
@@ -141,7 +143,6 @@ public class Hotels {
 			}
 		}
 		System.out.println("Please check it in the MySQL Table.......");
-		
 
 	}
 
@@ -150,7 +151,35 @@ public class Hotels {
 		// take id input from the user
 
 		// use Delete query
+		String url = "jdbc:mysql://localhost:3306/HotelDBMS";
+		String username = "root";
+		String password = "root";
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			conn = DriverManager.getConnection(url, username, password);
+			System.out.println("Connection is created successfully:");
+			stmt = (Statement) conn.createStatement();
+			Scanner sc = new Scanner(System.in);
 
+			System.out.println("Enter the ID you want to delete...");
+			int user = sc.nextInt();
+
+			String sql = "DELETE FROM Hotels " + "WHERE id = 56";
+			stmt.executeUpdate(sql);
+
+			System.out.println("the id have been deleted! ");
+
+			conn.close();
+		} catch (Exception e) {
+			System.err.println("Got an exception! ");
+			System.err.println(e.getMessage());
+		}
 	}
 
 	public static void makeIsActiveFalseById() {

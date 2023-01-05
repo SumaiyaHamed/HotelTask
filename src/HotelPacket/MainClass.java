@@ -55,6 +55,8 @@ public class MainClass {
 				break;
 
 			case 5:
+				
+				hotel.deleteById();
 
 				break;
 
