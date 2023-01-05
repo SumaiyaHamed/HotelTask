@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Hotels {
@@ -20,7 +21,7 @@ public class Hotels {
 				+ "is_Active Boolean not null , " + " PRIMARY KEY ( id ))";
 		java.sql.Connection conn = null;
 		try {
-			Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			DriverManager.registerDriver(driver);
 			conn = DriverManager.getConnection(url, user, pass);
 			java.sql.Statement st = conn.createStatement();
@@ -96,6 +97,47 @@ public class Hotels {
 		// print on console
 
 		// use Update query and ResultSets for showing
+		String url = "jdbc:mysql://localhost:3306/HotelDBMS";
+		String user = "root";
+		String pass = "root";
+		String hotel_location = "MUSCAT";
+		String created_date = "2022-06-20";
+		int is_Active = 1;
+		
+		Scanner sc=new Scanner(System.in);
+		
+		System.out.println("Enter the ID.....");
+		int id=sc.nextInt();
+		System.out.println("Enter Hotel Name.....");
+		String hotel_name=sc.next();
+		System.out.println("=============================================");
+		System.out.println("Hotel Name:"+"   "+hotel_name+"   "+"Hotel ID:"+"   "+ id );
+		System.out.println("=============================================");
+		
+		System.out.println("Enter the NEW Update Date for the Hotel"+"("+hotel_name+")...");
+		String userinput=sc.next();
+		String sql="UPDATE Hotels SET hotel_name=(" + id + ",'" + (hotel_name + id) + "','"
+				+ hotel_location  + "','" + created_date  + "','" + userinput  + "',"
+				+ is_Active  + ")";
+
+		java.sql.Connection conn = null;
+		try {
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			DriverManager.registerDriver(driver);
+			conn = DriverManager.getConnection(url, user, pass);
+			java.sql.Statement st = conn.createStatement();
+			int m = st.executeUpdate(sql);
+			if (m >= 1) {
+				System.out.println("Update ID successfuly...");
+				
+			} else {
+				System.out.println(" Update ID faild...");
+			}
+			conn.close();
+		} catch (Exception ex) {
+			System.err.println(ex);
+		}
+		
 
 	}
 
@@ -138,43 +180,37 @@ public class Hotels {
 
 		String url = "jdbc:mysql://localhost:3306/HotelDBMS";
 
-		String user = "sa";
+		String user = "root";
 		String pass = "root";
-		int i;
-		String hotel_name = "The Blatenyem";
-		String hotel_location = "Muscat";
-		String create_date = "20-06-2022";
-		String update_date = "20-06-2024";
-		boolean is_active = true;
+		Random rn = new Random();
+		Integer numberToAdd = rn.nextInt(100);
+		// int id;
+		String hotel_name = "WEAM";
+		String hotel_location = "MUSCAT";
+		String created_date = "2022-06-20";
+		String updated_date = "2025-05-20";
+		int is_Active = 1;
 
-		for (i = 0; i < a; i++) {
+		for (int i = 0; i < a; i++) {
 
-			String sql = "insert into Students values(" + i + ",'" + hotel_name + "','" + hotel_location + "','" + "','"
-					+ create_date + "','" + update_date + "','" + is_active + "','" + "')";
-
-			Connection con = null;
-
+			String sql = "INSERT INTO  Hotels VALUES (" + i + numberToAdd + ",'" + (hotel_name + i) + "','"
+					+ (hotel_location + i) + "','" + (created_date + "/" + i) + "','" + (updated_date + "/" + i) + "',"
+					+ (is_Active + i) + ")";
+			java.sql.Connection conn = null;
 			try {
-
 				Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-
 				DriverManager.registerDriver(driver);
-
-				con = DriverManager.getConnection(url, user, pass);
-
-				Statement st = con.createStatement();
-
+				conn = DriverManager.getConnection(url, user, pass);
+				java.sql.Statement st = conn.createStatement();
 				int m = st.executeUpdate(sql);
-				if (m >= 1)
-					System.out.println("inserted successfully : " + sql);
-				else
-					System.out.println("insertion failed");
+				if (m >= 1) {
+					System.out.println("inserted data successfuly...");
 
-				con.close();
-			}
-
-			catch (Exception ex) {
-
+				} else {
+					System.out.println(" faild inserted data...");
+				}
+				conn.close();
+			} catch (Exception ex) {
 				System.err.println(ex);
 			}
 

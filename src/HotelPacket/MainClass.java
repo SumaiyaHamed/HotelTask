@@ -22,8 +22,14 @@ public class MainClass {
 			System.out.println("_          6-MakeIs Active False By Id         _");
 			System.out.println("_          7-Insert Into Table                 _");
 			System.out.println("================================================");
+			
+			System.out.println("         -> please Select Option<-               ");
+			int list=sc1.nextInt();
 
-			int list = 0;
+
+			//int list = 0;
+			
+			
 			switch (list) {
 			case 1:
 				
@@ -43,6 +49,8 @@ public class MainClass {
 				break;
 
 			case 4:
+				
+				hotel.updateById();
 
 				break;
 
@@ -61,7 +69,7 @@ public class MainClass {
 				break;
 			}
 
-		} while (true);
+		} while (false);
 
 	}
 
