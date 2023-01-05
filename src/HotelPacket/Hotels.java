@@ -82,7 +82,6 @@ public class Hotels {
 	public static void getById() {
 
 		// take id input from the user
-		
 
 		// print on console
 
@@ -116,13 +115,11 @@ public class Hotels {
 
 	}
 
-	public static boolean insertIntoTable() {
+	public static void insertIntoTable() {
 
 		Scanner sa = new Scanner(System.in);
 
 		// take input from user how many number of rows are to be inserted
-		System.out.println("How many number of rows you want to add?");
-		int a = sa.nextInt();
 
 		// input data in database using INSERT query in a loop
 
@@ -136,7 +133,52 @@ public class Hotels {
 
 		// For Boolean columns use: true
 
-		return false;
+		System.out.println("How many number of rows you want to add?");
+		int a = sa.nextInt();
+
+		String url = "jdbc:mysql://localhost:3306/HotelDBMS";
+
+		String user = "sa";
+		String pass = "root";
+		int i;
+		String hotel_name = "The Blatenyem";
+		String hotel_location = "Muscat";
+		String create_date = "20-06-2022";
+		String update_date = "20-06-2024";
+		boolean is_active = true;
+
+		for (i = 0; i < a; i++) {
+
+			String sql = "insert into Students values(" + i + ",'" + hotel_name + "','" + hotel_location + "','" + "','"
+					+ create_date + "','" + update_date + "','" + is_active + "','" + "')";
+
+			Connection con = null;
+
+			try {
+
+				Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+
+				DriverManager.registerDriver(driver);
+
+				con = DriverManager.getConnection(url, user, pass);
+
+				Statement st = con.createStatement();
+
+				int m = st.executeUpdate(sql);
+				if (m >= 1)
+					System.out.println("inserted successfully : " + sql);
+				else
+					System.out.println("insertion failed");
+
+				con.close();
+			}
+
+			catch (Exception ex) {
+
+				System.err.println(ex);
+			}
+
+		}
 
 	}
 
