@@ -98,45 +98,49 @@ public class Hotels {
 
 		// use Update query and ResultSets for showing
 		String url = "jdbc:mysql://localhost:3306/HotelDBMS";
-		String user = "root";
-		String pass = "root";
-		String hotel_location = "MUSCAT";
-		String created_date = "2022-06-20";
-		int is_Active = 1;
-		
-		Scanner sc=new Scanner(System.in);
-		
-		System.out.println("Enter the ID.....");
-		int id=sc.nextInt();
-		System.out.println("Enter Hotel Name.....");
-		String hotel_name=sc.next();
-		System.out.println("=============================================");
-		System.out.println("Hotel Name:"+"   "+hotel_name+"   "+"Hotel ID:"+"   "+ id );
-		System.out.println("=============================================");
-		
-		System.out.println("Enter the NEW Update Date for the Hotel"+"("+hotel_name+")...");
-		String userinput=sc.next();
-		String sql="UPDATE Hotels SET hotel_name=(" + id + ",'" + (hotel_name + id) + "','"
-				+ hotel_location  + "','" + created_date  + "','" + userinput  + "',"
-				+ is_Active  + ")";
-
-		java.sql.Connection conn = null;
+		String username = "root";
+		String password = "root";
+	 Connection conn = null;
+		Statement stmt = null;
 		try {
-			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-			DriverManager.registerDriver(driver);
-			conn = DriverManager.getConnection(url, user, pass);
-			java.sql.Statement st = conn.createStatement();
-			int m = st.executeUpdate(sql);
-			if (m >= 1) {
-				System.out.println("Update ID successfuly...");
-				
-			} else {
-				System.out.println(" Update ID faild...");
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (Exception e) {
+				System.out.println(e);
 			}
-			conn.close();
-		} catch (Exception ex) {
-			System.err.println(ex);
+			conn = DriverManager.getConnection(url, username, password);
+			System.out.println("Connection is created successfully:");
+			stmt = (Statement) conn.createStatement();
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Please Enter any id to Update hotel data :");
+	         int userinput =scanner.nextInt();
+	         System.out.println("Please Enter the new Hotel name:");
+	         String hotelname=scanner.next();
+	         System.out.println("Please Enter the new Hotel location:");
+	         String hotellocatin=scanner.next();
+	
+	         Statement st = conn.createStatement();
+	         String sql="UPDATE Hotels SET hotel_name='"+hotelname+"',hotel_location='"+hotellocatin+"' WHERE id='"+userinput+"'";
+		     int result=st.executeUpdate(sql);
+			System.out.println("updated  successfully...");
+		} catch (SQLException excep) {
+			excep.printStackTrace();
+		} catch (Exception excep) {
+			excep.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					conn.close();
+			} catch (SQLException se) {
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
 		}
+		System.out.println("Please check it in the MySQL Table.......");
 		
 
 	}
