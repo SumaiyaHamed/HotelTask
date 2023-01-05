@@ -55,6 +55,8 @@ public class MainClass {
 				break;
 
 			case 7:
+				
+				hotel.insertIntoTable();
 
 				break;
 			}
