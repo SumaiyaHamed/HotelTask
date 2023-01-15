@@ -55,7 +55,7 @@ public class Hotels {
 		int s = sc.nextInt();
 
 		// use SELECT query and ResultSets for showing
-		String sql = "SELECT * FROM hotels";
+		String sql = "SELECT * FROM Hotels";
 
 		Connection con = null;
 
@@ -93,7 +93,7 @@ public class Hotels {
 		String sql = "select * from Hotels where id =" + user;
 		java.sql.Connection conn = null;
 		try {
-			Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			DriverManager.registerDriver(driver);
 			conn = DriverManager.getConnection(url, username, password);
 			java.sql.Statement st = conn.createStatement();
@@ -185,7 +185,7 @@ public class Hotels {
 		Statement stmt = null;
 		try {
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
+				Class.forName("com.mysql.cj.jdbc.Driver");
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -230,7 +230,7 @@ public class Hotels {
 		String password = "root";
 		Connection con = null;
 		try {
-			Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			DriverManager.registerDriver(driver);
 			con = DriverManager.getConnection(url, username, password);
 			Statement st = con.createStatement();
